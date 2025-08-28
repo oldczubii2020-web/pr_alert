@@ -75,20 +75,38 @@ const nicki = [
 const colors = ["#FFD700", "#00FF00", "#FF4500", "#1E90FF", "#FF69B4"];
 const fonts = ["Arial, sans-serif", "Verdana, sans-serif", "Courier New, monospace", "Georgia, serif", "Comic Sans MS, cursive"];
 
+let lastNick = ""; // pamiętamy ostatni nick, żeby nie powtarzał się od razu
+
 function showAlert() {
   const pr = randomPR();
   const alertDiv = document.getElementById('alert');
 
-  // Losowy nick, kolor i czcionka
-  const nick = nicki[Math.floor(Math.random() * nicki.length)];
+  // Losowanie nowego nicka innego niż poprzedni
+  let nick;
+  do {
+    nick = nicki[Math.floor(Math.random() * nicki.length)];
+  } while (nick === lastNick);
+  lastNick = nick;
+
+  // Losowy kolor i czcionka
   const color = colors[Math.floor(Math.random() * colors.length)];
   const font = fonts[Math.floor(Math.random() * fonts.length)];
 
+  // Reset animacji
+  alertDiv.classList.remove('show');
+
+  // Ustaw tekst i style
   alertDiv.style.color = color;
   alertDiv.style.fontFamily = font;
   alertDiv.innerText = `Nowy obserwujący: ${nick} – Twoja ilość PR: ${pr}`;
+
+  // Wymuszenie przerysowania elementu, żeby animacja zadziałała
+  void alertDiv.offsetWidth;
+
+  // Dodanie klasy show
   alertDiv.classList.add('show');
 
+  // Ukrycie alertu po 5 sekundach
   setTimeout(() => { alertDiv.classList.remove('show'); }, 5000);
 }
 </script>
