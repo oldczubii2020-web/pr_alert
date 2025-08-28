@@ -56,10 +56,21 @@ function randomPR() {
   return Math.floor(Math.random() * 5000) + 1;
 }
 
-// Wymyślony nick obserwującego
-const nick = "Maciek2010";
+// Lista 50 nicków
+const nicki = [
+  "spoconymacius2010","arekwariatek3921","lisa123","tomekX","katarzyna99",
+  "marcin777","ania_s","krzysiek_p","joanna_l","bartek2001",
+  "monika_90","pawel_zzz","ola_1234","lukasz92","natalia_98",
+  "michal_k","magda_s","adam_007","ewelina23","jakubX",
+  "klaudia98","piotr123","justyna_s","dawid2000","ewa_92",
+  "marta_l","rafal_77","ola_99","marcin_2002","aniaX",
+  "lukasz1999","kasia_k","tomek_90","monika777","pawel_x",
+  "ewa_l","jakub_12","klaudia2001","piotr_98","natalia2000",
+  "michal123","magdaX","adam1995","ewelina_007","jakub_s",
+  "klaudia_91","piotrX","justyna2000","dawid_99","ewa_007"
+];
 
-// Lista kolorów i czcionek do losowania
+// Lista kolorów i czcionek
 const colors = ["#FFD700", "#00FF00", "#FF4500", "#1E90FF", "#FF69B4"];
 const fonts = ["Arial, sans-serif", "Verdana, sans-serif", "Courier New, monospace", "Georgia, serif", "Comic Sans MS, cursive"];
 
@@ -67,17 +78,16 @@ function showAlert() {
   const pr = randomPR();
   const alertDiv = document.getElementById('alert');
 
-  // Losowy kolor i czcionka
+  // Losowy nick, kolor i czcionka
+  const nick = nicki[Math.floor(Math.random() * nicki.length)];
   const color = colors[Math.floor(Math.random() * colors.length)];
   const font = fonts[Math.floor(Math.random() * fonts.length)];
 
   alertDiv.style.color = color;
   alertDiv.style.fontFamily = font;
-
   alertDiv.innerText = `Nowy obserwujący: ${nick} – Twoja ilość PR: ${pr}`;
   alertDiv.classList.add('show');
 
-  // Po 5 sekundach ukryj alert
   setTimeout(() => { alertDiv.classList.remove('show'); }, 5000);
 }
 </script>
