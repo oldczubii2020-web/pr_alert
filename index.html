@@ -4,24 +4,29 @@
 <meta charset="UTF-8">
 <title>PR Alert</title>
 <style>
-  body { margin:0; background:transparent; }
+  body { 
+    margin:0; 
+    background:#1a1a1a; 
+    font-family: Arial, sans-serif;
+  }
+
   #alert {
     font-size: 48px;
-    color: #FFD700;
     text-align: center;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-family: Arial, sans-serif;
     text-shadow: 2px 2px 5px black;
     opacity: 0;
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: opacity 0.5s ease, transform 0.5s ease, color 0.5s ease, font-family 0.5s ease;
   }
+
   #alert.show {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1.1);
   }
+
   #button {
     position: fixed;
     bottom: 10px;
@@ -30,6 +35,15 @@
     font-size: 20px;
     padding: 10px 20px;
     z-index: 1000;
+    background-color: #FFD700;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  #button:hover {
+    background-color: #FFC300;
   }
 </style>
 </head>
@@ -39,15 +53,27 @@
 
 <script>
 function randomPR() {
-  return Math.floor(Math.random() * 5000) + 1; // losowa liczba PR 1-5000
+  return Math.floor(Math.random() * 5000) + 1;
 }
 
 // Wymyślony nick obserwującego
 const nick = "Maciek2010";
 
+// Lista kolorów i czcionek do losowania
+const colors = ["#FFD700", "#00FF00", "#FF4500", "#1E90FF", "#FF69B4"];
+const fonts = ["Arial, sans-serif", "Verdana, sans-serif", "Courier New, monospace", "Georgia, serif", "Comic Sans MS, cursive"];
+
 function showAlert() {
   const pr = randomPR();
   const alertDiv = document.getElementById('alert');
+
+  // Losowy kolor i czcionka
+  const color = colors[Math.floor(Math.random() * colors.length)];
+  const font = fonts[Math.floor(Math.random() * fonts.length)];
+
+  alertDiv.style.color = color;
+  alertDiv.style.fontFamily = font;
+
   alertDiv.innerText = `Nowy obserwujący: ${nick} – Twoja ilość PR: ${pr}`;
   alertDiv.classList.add('show');
 
